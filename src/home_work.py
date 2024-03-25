@@ -14,7 +14,7 @@ class Category:
         products: list
         self.name = name
         self.descriptions = descriptions
-        self.products = products
+        self.__products = products
         Category.counter_categories += 1
         if len(products) == len(set(products)):
             Category.original_product = len(products)
@@ -22,6 +22,8 @@ class Category:
             Category.original_product = len(set(products))
 
 
+    def append_products(self,product):
+        return self.__products.append(product)
 
 
 class Product:
