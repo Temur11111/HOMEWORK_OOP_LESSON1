@@ -25,6 +25,14 @@ class Category:
     def append_products(self,product):
         return self.__products.append(product)
 
+    @property
+    def return_pruducts(self):
+        """Возвращает список товаров в форме: Продукт, 80 руб. Остаток: 15 шт.. К атрибуту можно обращаться без ()."""
+        result = ""
+        for product in self.__products:
+            result+=f'{Product.name}, {Product.price} руб. Остаток {Product.quantity_in_stock} шт.'
+            return result
+
 
 class Product:
     """Класс продуктов"""
