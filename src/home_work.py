@@ -21,18 +21,23 @@ class Category:
         else:
             Category.original_product = len(set(products))
 
+    def __len__(self):
+        return len(self.__products)
 
     def append_products(self,product):
         return self.__products.append(product)
 
     @property
-    def return_pruducts(self):
-        """Возвращает список товаров в форме: Продукт, 80 руб. Остаток: 15 шт.. К атрибуту можно обращаться без ()."""
+    def return_products(self):
+        """Возвращает список товаров в форме: Продукт, 80 руб. Остаток: 15 шт. К атрибуту можно обращаться без ()."""
         result = ""
         for product in self.__products:
             result+=f'{product.name}, {product.price} руб. Остаток {product.quantity_in_stock} шт.'
         return result
 
+
+    def __str__(self):
+        return f"Название категории: {self.name}, количество продуктов: {Category.original_product}"
 
 class Product:
     """Класс продуктов"""
@@ -49,8 +54,17 @@ class Product:
         quantity_in_stock: int  ###количество в наличии
         self.name = name
         self.descriptions = descriptions
-        self.price = price
+        self.__price = price
         self.quantity_in_stock = quantity_in_stock
+
+    def __add__(self, other):
+        return float(self.__price) * int(self.quantity_in_stock) + float(other.__price) * int(other.quantity_in_stock)
+
+    def __str__(self):
+        return f"Продукт: {self.name}, Цена: {self.__price}, количество в наличии: {self.quantity_in_stock}"
+
+
+
 
     @classmethod
     def product_init(cls,product_atribut):
@@ -61,11 +75,26 @@ class Product:
 
     @property
     def price(self):
-        return f"{self.price}"
+        return f"{self.__price}"
 
     @price.setter
     def price_change(self,new_price):
         if new_price <= 0:
             print("Некорректная цена")
         else:
-            self.price = new_price
+            self.__price = new_price
+
+
+
+
+product1 = Product.product_init("Айфон хороший 10 50")
+
+product2 = Product.product_init("Самсунг отличный 10 12")
+
+
+category1 = Category("Телефоны", "Смартфоны", ["f","fe","effe","f",'EFF',"f"])
+
+print(len(category1))
+print(Category.original_product)
+
+print(product2+product1)
