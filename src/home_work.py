@@ -37,7 +37,7 @@ class Category:
 
 
     def __str__(self):
-        return f"Название категории: {self.name}, количество продуктов: {Category.original_product}"
+        return f"Название категории: {self.name}, количество продуктов: {len(self)}"
 
 class Product:
     """Класс продуктов"""
@@ -61,7 +61,7 @@ class Product:
         return float(self.__price) * int(self.quantity_in_stock) + float(other.__price) * int(other.quantity_in_stock)
 
     def __str__(self):
-        return f"Продукт: {self.name}, Цена: {self.__price}, количество в наличии: {self.quantity_in_stock}"
+        return f"Продукт: {self.name}, Цена: {self.price}, остаток: {self.quantity_in_stock} шт."
 
 
 
@@ -92,9 +92,5 @@ product1 = Product.product_init("Айфон хороший 10 50")
 product2 = Product.product_init("Самсунг отличный 10 12")
 
 
-category1 = Category("Телефоны", "Смартфоны", ["f","fe","effe","f",'EFF',"f"])
+category1 = Category("Телефоны", "Смартфоны", ["fe","effe","f",'EFF',"f"])
 
-print(len(category1))
-print(Category.original_product)
-
-print(product2+product1)
