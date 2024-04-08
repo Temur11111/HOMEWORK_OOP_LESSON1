@@ -22,7 +22,11 @@ class Category:
             Category.original_product = len(set(products))
 
     def __len__(self):
-        return len(self.__products)
+        counter = 0
+        for product in self.__products:
+            counter+=int(product.quantity_in_stock)
+
+        return counter
 
     def append_products(self,product):
         return self.__products.append(product)
@@ -89,8 +93,9 @@ class Product:
 
 product1 = Product.product_init("Айфон хороший 10 50")
 
-product2 = Product.product_init("Самсунг отличный 10 12")
+product2 = Product.product_init("Самсунг отличный 10 56")
 
 
-category1 = Category("Телефоны", "Смартфоны", ["fe","effe","f",'EFF',"f"])
+category1 = Category("Телефоны", "Смартфоны", [product1,product2])
 
+print(category1)
