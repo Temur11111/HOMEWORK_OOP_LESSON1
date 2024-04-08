@@ -29,7 +29,10 @@ class Category:
         return counter
 
     def append_products(self,product):
-        return self.__products.append(product)
+        if isinstance(product, Product):
+            self.__products.append(product)
+        else:
+            print("Добавлять только объекты экземпляры класса Product или его дочки")
 
     @property
     def return_products(self):
@@ -62,7 +65,12 @@ class Product:
         self.quantity_in_stock = quantity_in_stock
 
     def __add__(self, other):
-        return float(self.__price) * int(self.quantity_in_stock) + float(other.__price) * int(other.quantity_in_stock)
+
+        if type(self) == type(other):
+            return float(self.__price) * int(self.quantity_in_stock) + float(other.__price) * int(other.quantity_in_stock)
+
+        else:
+            raise TypeError
 
     def __str__(self):
         return f"Продукт: {self.name}, Цена: {self.price}, остаток: {self.quantity_in_stock} шт."
@@ -93,7 +101,7 @@ class Product:
 
 product1 = Product.product_init("Айфон хороший 10 50")
 
-product2 = Product.product_init("Самсунг отличный 10 56")
+product2 = Product.product_init("Самсунг отличный 10 6")
 
 
 category1 = Category("Телефоны", "Смартфоны", [product1,product2])
